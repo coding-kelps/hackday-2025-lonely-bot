@@ -1,6 +1,6 @@
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import HumanMessage, AIMessage
 import logging
 import socket
 import os
@@ -9,6 +9,12 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
+logging.getLogger('openai._base_client').setLevel(logging.WARNING)
+logging.getLogger('httpcore.connection').setLevel(logging.WARNING)
+logging.getLogger('httpcore.http11').setLevel(logging.WARNING)
+logging.getLogger('httpx').setLevel(logging.WARNING)
+
+
 
 LONELY_BOT_ENDLINE = "See you next time!"
 LONELY_BOT_TIMEOUT = "... guess you don't want to answer me ..."
@@ -24,6 +30,7 @@ class LonelyGPT():
         self.lonely_bot_packet_size = 4096
         self.prompt_template = ChatPromptTemplate([
             ("system", "Respond using the fewest word possible"),
+            ("system", "Respond to the last question of the robot only"),
             MessagesPlaceholder("msgs")
         ])
         self.conversation_history = []
@@ -36,33 +43,43 @@ class LonelyGPT():
             logging.debug(f"Connected to lonely bot server")
 
             while True:
-                lonely_bot_line = s.recv(self.lonely_bot_packet_size).decode('utf-8')
+                data = s.recv(self.lonely_bot_packet_size)
 
-                self.conversation_history.append(
-                    HumanMessage(content=lonely_bot_line)
-                )
-
-                logging.debug(f"lonely bot send: {lonely_bot_line}")
-
-                if lonely_bot_line == LONELY_BOT_ENDLINE:
-                    logging.warning(f"lonely bot ended conversation")
-
-                    return
+                if len(data) < 1:
+                    continue
                 else:
-                    if "?" in lonely_bot_line:
-                        interaction_count += 1
-                        logging.info(f"passed to interaction n°{interaction_count}")
+                    lonely_bot_line = data.decode('utf-8')
 
-                        prompt = self.prompt_template.format_prompt(
-                            msgs=self.conversation_history
-                        )
+                    logging.debug(f"lonely bot send: \"{lonely_bot_line}\"")
 
-                        res = self.model.invoke(prompt)
+                    self.conversation_history.append(
+                        HumanMessage(content=lonely_bot_line)
+                    )
 
-                        s.sendall(res.content.encode('utf-8'))
-                        logging.debug(f"lonely gpt responded: {res.content}")
+                    if lonely_bot_line == LONELY_BOT_ENDLINE:
+                        logging.warning(f"lonely bot ended conversation")
+
+                        return
                     else:
-                        continue
+                        if "?" in lonely_bot_line:
+                            interaction_count += 1
+                            logging.info(f"passed to interaction n°{interaction_count}")
+
+                            prompt = self.prompt_template.format_prompt(
+                                msgs=self.conversation_history
+                            )
+
+                            lonely_gpt_line = self.model.invoke(prompt).content.encode('utf-8')
+
+                            s.sendall(lonely_gpt_line)
+
+                            self.conversation_history.append(
+                                AIMessage(content=lonely_gpt_line)
+                            )
+                            
+                            logging.debug(f"lonely gpt responded: \"{lonely_gpt_line}\"")
+                        else:
+                            continue
 
 if __name__ == "__main__":
     gpt = ChatOpenAI(
