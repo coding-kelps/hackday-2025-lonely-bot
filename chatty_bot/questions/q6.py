@@ -1,7 +1,7 @@
-from ..lonely_gpt import LonelyGPT
+from ..chatty_bot import ChattyBot
 import hashlib
 
-def q6(lonely_gpt: LonelyGPT, lonely_bot_line: str) -> str:
+def q6(chatty_bot: ChattyBot, lonely_bot_line: str) -> str:
     """
     Return the expected response to the 6th question of the lonely bot.
     Identifying the requested encoding base to hash the past 4 responses.
@@ -17,7 +17,7 @@ def q6(lonely_gpt: LonelyGPT, lonely_bot_line: str) -> str:
     You start with your name (format: 1,2,3,4)
     ```
     """
-    raw_response = ",".join(lonely_gpt.responses[1:])
+    raw_response = ",".join(chatty_bot.responses[1:])
 
     if "sha1" in lonely_bot_line:
         hash_object = hashlib.sha1(raw_response.encode("utf-8"))

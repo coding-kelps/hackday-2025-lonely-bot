@@ -1,6 +1,6 @@
-from ..lonely_gpt import LonelyGPT
+from ..chatty_bot import ChattyBot
 
-def q3(_lonely_gpt: LonelyGPT, lonely_bot_line: str) -> str:
+def q3(_chatty_bot: ChattyBot, lonely_bot_line: str) -> str:
     """
     Return the expected response to the 3rd question of the lonely bot.
     Give the fusion temperature of brass either in Celsius, Farenheit, Kelvin.

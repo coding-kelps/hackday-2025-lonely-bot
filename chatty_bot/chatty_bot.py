@@ -9,11 +9,12 @@ LONELY_BOT_TIMEOUT = "... guess you don't want to answer me ..."
 SIMPLE_QUESTION = 0
 INTERACTIVE_QUESTION = 1
 
-class LonelyGPT():
+class ChattyBot():
     def __init__(self,
                  model: ChatOllama | ChatOpenAI,
                  challenge_host: str = "challenges.hackday.Fr",
-                 challenge_port: int = 41521):
+                 challenge_port: int = 41521,
+                 name: str = "ChattyBot"):
         self.challenge_host = challenge_host
         self.challenge_port = challenge_port
         self.model = model
@@ -58,15 +59,15 @@ class LonelyGPT():
             logging.debug(f"lonely bot send: \"{lonely_bot_line}\"")
 
             if self.questions[question_counter][0] in lonely_bot_line:
-                if self.questions[question_counter][2] == SIMPLE_QUESTION:
-                    lonely_gpt_line = self.questions[question_counter][1](self, lonely_bot_line)
-
-                    self.socket.sendall(lonely_gpt_line.encode('utf-8'))
-
-                    logging.debug(f"lonely gpt responded: \"{lonely_gpt_line}\"")
-                    self.responses.append(lonely_gpt_line)
+                if self.questions[question_counter][2] == INTERACTIVE_QUESTION:
+                    self.questions[question_counter][1](self, lonely_bot_line)
                 else:
-                    lonely_gpt_line = lonely_gpt_line = self.questions[question_counter][1](self, lonely_bot_line)
+                    chatty_bot_line = self.questions[question_counter][1](self, lonely_bot_line)
+
+                    self.socket.sendall(chatty_bot_line.encode('utf-8'))
+
+                    logging.debug(f"chatty bot responded: \"{chatty_bot_line}\"")
+                    self.responses.append(chatty_bot_line)
                 
                 question_counter += 1
                 

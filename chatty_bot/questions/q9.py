@@ -1,8 +1,8 @@
-from ..lonely_gpt import LonelyGPT
+from ..chatty_bot import ChattyBot
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 
-def q9(lonely_gpt: LonelyGPT, lonely_bot_line: str) -> str:
+def q9(chatty_bot: ChattyBot, lonely_bot_line: str) -> str:
     """
     Return the expected response to the 9th question of the lonely bot.
     Translating the given word in the required language.
@@ -28,7 +28,7 @@ def q9(lonely_gpt: LonelyGPT, lonely_bot_line: str) -> str:
 
              Human: Starting with the basics, the name! Mine is Patrick Marcellus Playfoot
              What's yours?
-             Assistant: LonelyGPT
+             Assistant: ChattyBot
 
              Human: But, what about history? When was the first vapor train built? Give me the year please!
              Assistant: 1804
@@ -40,4 +40,4 @@ def q9(lonely_gpt: LonelyGPT, lonely_bot_line: str) -> str:
         msgs=conversation_history
     )
     
-    return lonely_gpt.model.invoke(prompt).content
+    return chatty_bot.model.invoke(prompt).content

@@ -1,7 +1,7 @@
 from langchain_openai import ChatOpenAI
 import logging
 import os
-from .lonely_gpt import LonelyGPT
+from .chatty_bot import ChattyBot
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -15,16 +15,16 @@ logging.getLogger('httpcore.http11').setLevel(logging.WARNING)
 logging.getLogger('httpx').setLevel(logging.WARNING)
 
 if __name__ == "__main__":
-    gpt = ChatOpenAI(
+    model = ChatOpenAI(
         model="gpt-4o",
         temperature=1.0,
         max_tokens=10,
         api_key=os.environ["OPENAI_API_KEY"],
     )
 
-    lonely_gpt = LonelyGPT(gpt)
+    chatty_bot = ChattyBot(model)
 
     try:
-        lonely_gpt.talk_to_lonely_bot()
+        chatty_bot.talk_to_lonely_bot()
     except Exception as e:
         logging.error(f"{e.args}")

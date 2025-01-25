@@ -1,6 +1,6 @@
-from ..lonely_gpt import LonelyGPT
+from ..chatty_bot import ChattyBot
 
-def q1(_lonely_gpt: LonelyGPT, _lonely_bot_line: str) -> str:
+def q1(_chatty_bot: ChattyBot, _lonely_bot_line: str) -> str:
     """
     Return the expected response to the 1st question of the lonely bot.
     Simply returning "yes".

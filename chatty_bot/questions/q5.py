@@ -1,9 +1,9 @@
-from ..lonely_gpt import LonelyGPT
+from ..chatty_bot import ChattyBot
 import base64
 
 ENCODED_PHRASE = "I know many encoding bases, but which one i'm using...?"
 
-def q5(lonely_gpt: LonelyGPT, lonely_bot_line: str) -> str:
+def q5(chatty_bot: ChattyBot, lonely_bot_line: str) -> str:
     """
     Return the expected response to the 5th question of the lonely bot.
     Give the encoding base of the lonely bot line.
@@ -19,7 +19,7 @@ def q5(lonely_gpt: LonelyGPT, lonely_bot_line: str) -> str:
     Ng!)(Z+9SVVQzUKWo~0{WNB_^AYx&2WpgYbVs&&NcW7y2XdrKHWguxMZ6I}XX>MmOE-pU
     ```
     """
-    hash = lonely_gpt.listen_to_lonely_bot()
+    hash = chatty_bot.listen_to_lonely_bot()
     
     if base64.b64decode(hash).decode("utf-8") == ENCODED_PHRASE:
         return "base64"
