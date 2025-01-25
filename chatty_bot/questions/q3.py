@@ -9,7 +9,7 @@ def q3(_chatty_bot, lonely_bot_line: str) -> str:
     it can ask us either in Celsius, Fahrenheit, Kelvin.
 
     ```
-    what's the fusion temperature of brass? Give it to me in Kelvin and strip off decimals
+    What's the fusion temperature of brass? Give it to me in Kelvin and strip off decimals
     ```
     """
     
