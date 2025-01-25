@@ -1,7 +1,6 @@
-from ..chatty_bot import ChattyBot
 import hashlib
 
-def q6(chatty_bot: ChattyBot, lonely_bot_line: str) -> str:
+def q6(chatty_bot, lonely_bot_line: str) -> str:
     """
     Return the expected response to the 6th question of the lonely bot.
     Identifying the requested encoding base to hash the past 4 responses.

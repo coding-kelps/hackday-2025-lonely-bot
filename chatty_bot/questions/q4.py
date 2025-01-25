@@ -1,6 +1,4 @@
-from ..chatty_bot import ChattyBot
-
-def q4(_chatty_bot: ChattyBot, lonely_bot_line: str) -> str:
+def q4(_chatty_bot, lonely_bot_line: str) -> str:
     """
     Return the expected response to the 4th question of the lonely bot.
     Give the year in which the first vapor/eletric/diesiel/magnetic suspension
