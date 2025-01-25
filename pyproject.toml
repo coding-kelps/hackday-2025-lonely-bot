@@ -1,7 +1,7 @@
 [project]
-name = "lonely-gpt"
+name = "chatty-bot"
 version = "0.1.0"
-description = "An solution implementation to the hackday.fr 2025 lonely bot challenge"
+description = "A solution implementation to the hackday.fr 2025 lonely bot challenge"
 authors = [
     {name = "Your Name",email = "you@example.com"}
 ]

@@ -1,11 +1,11 @@
 import logging
-from ..lonely_gpt import LonelyGPT, LONELY_BOT_ENDLINE
+from ..chatty_bot import ChattyBot, LONELY_BOT_ENDLINE
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 
 Q8_ENDLINE = "WIN"
 
-def q8(lonely_gpt: LonelyGPT, lonely_bot_line: str):
+def q8(chatty_bot: ChattyBot, lonely_bot_line: str):
     """
     Guess the number of the bot.
 
@@ -30,7 +30,7 @@ def q8(lonely_gpt: LonelyGPT, lonely_bot_line: str):
 
              Human: Starting with the basics, the name! Mine is Patrick Marcellus Playfoot
              What's yours?
-             Assistant: LonelyGPT
+             Assistant: ChattyBot
 
              Human: But, what about history? When was the first vapor train built? Give me the year please!
              Assistant: 1804
@@ -46,7 +46,7 @@ def q8(lonely_gpt: LonelyGPT, lonely_bot_line: str):
     while lonely_bot_line != Q8_ENDLINE:
         logging.debug(f"lonely bot send: \"{lonely_bot_line}\"")
 
-        if lonely_gpt == LONELY_BOT_ENDLINE:
+        if chatty_bot == LONELY_BOT_ENDLINE:
             raise Exception("game failed")
         
         conversation_history.append(
@@ -57,16 +57,16 @@ def q8(lonely_gpt: LonelyGPT, lonely_bot_line: str):
             msgs=conversation_history
         )
 
-        lonely_gpt_line = lonely_gpt.model.invoke(prompt).content
+        chatty_bot_line = chatty_bot.model.invoke(prompt).content
 
         conversation_history.append(
-            AIMessage(content=lonely_gpt_line)
+            AIMessage(content=chatty_bot_line)
         )
 
-        lonely_gpt.socket.sendall(lonely_gpt_line.encode('utf-8'))
+        chatty_bot.socket.sendall(chatty_bot_line.encode('utf-8'))
 
-        logging.debug(f"lonely gpt responded: \"{lonely_gpt_line}\"")
+        logging.debug(f"lonely gpt responded: \"{chatty_bot_line}\"")
 
-        lonely_bot_line = lonely_gpt.listen_to_lonely_bot()
+        lonely_bot_line = chatty_bot.listen_to_lonely_bot()
     
     return

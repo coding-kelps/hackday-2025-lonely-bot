@@ -1,10 +1,10 @@
-from ..lonely_gpt import LonelyGPT
+from ..chatty_bot import ChattyBot
 import re
 import hashlib
 
 ROCKYOU_FILEPATH = "./resources/rockyou-1000.txt"
 
-def q10(_lonely_gpt: LonelyGPT, lonely_bot_line: str) -> str:
+def q10(_chatty_bot: ChattyBot, lonely_bot_line: str) -> str:
     """
     Return the expected response to the 9th question of the lonely bot.
     Translating the given word in the required language.
