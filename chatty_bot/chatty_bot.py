@@ -15,6 +15,7 @@ class ChattyBot():
                  challenge_host: str = "challenges.hackday.Fr",
                  challenge_port: int = 41521,
                  name: str = "ChattyBot"):
+        self.name = name
         self.challenge_host = challenge_host
         self.challenge_port = challenge_port
         self.model = model
