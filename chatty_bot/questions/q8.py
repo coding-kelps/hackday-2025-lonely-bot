@@ -21,19 +21,15 @@ def q8(chatty_bot, lonely_bot_line: str):
     """
     prompt_template = ChatPromptTemplate([
             SystemMessage("""
-             You are responding to a robot which is just a facade for a form with a strict format, always with a single word.
+             You are playing 'Guess the number', your goal is to guess the Human number
+             in 5 try only (from a range from 0 to 20). ANSWER NUMBER ONLY.
 
              Example:
-
-             Human: Would you care to spend some time with me ...?
-             Assistant: yes
-
-             Human: Starting with the basics, the name! Mine is Patrick Marcellus Playfoot
-             What's yours?
-             Assistant: ChattyBot
-
-             Human: But, what about history? When was the first vapor train built? Give me the year please!
-             Assistant: 1804
+                          
+             Human: Now, we're gonna play 'Guess the number'!
+             I'm thinking of a number between 0 and 20, and you have 5 tries to find it!
+             Let's start!
+             Assistant: 10
              """),
             MessagesPlaceholder("msgs")
         ])
@@ -44,8 +40,6 @@ def q8(chatty_bot, lonely_bot_line: str):
     """)]
     
     while lonely_bot_line != Q8_ENDLINE:
-        logging.debug(f"lonely bot send: \"{lonely_bot_line}\"")
-
         if chatty_bot == LONELY_BOT_ENDLINE:
             raise Exception("game failed")
         
@@ -63,10 +57,12 @@ def q8(chatty_bot, lonely_bot_line: str):
             AIMessage(content=chatty_bot_line)
         )
 
-        chatty_bot.socket.sendall(chatty_bot_line.encode('utf-8'))
+        chatty_bot.socket.sendall(chatty_bot_line.encode("utf-8"))
 
-        logging.debug(f"lonely gpt responded: \"{chatty_bot_line}\"")
+        logging.debug(f"chatty bot responded: \"{chatty_bot_line}\"")
 
         lonely_bot_line = chatty_bot.listen_to_lonely_bot()
+
+        logging.debug(f"lonely bot send: \"{lonely_bot_line}\"")
     
     return

@@ -77,7 +77,7 @@ def q7(chatty_bot, lonely_bot_line: str):
 
         chatty_bot.socket.sendall(chatty_bot_line.encode('utf-8'))
 
-        logging.debug(f"lonely gpt responded: \"{chatty_bot_line}\"")
+        logging.debug(f"chatty bot responded: \"{chatty_bot_line}\"")
 
         lonely_bot_line = chatty_bot.listen_to_lonely_bot()
     
