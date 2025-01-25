@@ -1,4 +1,5 @@
-from langchain_community.chat_models import ChatOllama
+from langchain_ollama import ChatOllama
+import os
 import logging
 from .chatty_bot import ChattyBot
 
@@ -15,9 +16,10 @@ logging.getLogger('httpx').setLevel(logging.WARNING)
 
 if __name__ == "__main__":
     model = ChatOllama(
-        model="gemma:2b",
+        model="llama3.1:latest",
         temperature=1.0,
         max_tokens=15,
+        base_url=os.environ["OLLAMA_BASE_URL"]
     )
 
     chatty_bot = ChattyBot(model)
