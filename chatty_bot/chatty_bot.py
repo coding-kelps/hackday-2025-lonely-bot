@@ -22,7 +22,7 @@ class ChattyBot():
         self.responses = []
         self.questions = [
             ("Would you care to spend some time with me ...?",                                                          q1,     SIMPLE_QUESTION     ),
-            ("Starting with the basics, the name! Mine is Arabella Etheridge What's yours?",                            q2,     SIMPLE_QUESTION     ),
+            ("Starting with the basics, the name!",                                                                     q2,     SIMPLE_QUESTION     ),
             ("what's the fusion temperature of brass?",                                                                 q3,     SIMPLE_QUESTION     ),
             ("But, what about history?",                                                                                q4,     SIMPLE_QUESTION     ),
             ("Can't have you on this point, you know your basics! We'll see if you can keep up!",                       q5,     SIMPLE_QUESTION     ),
