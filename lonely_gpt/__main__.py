@@ -1,9 +1,6 @@
 from langchain_openai import ChatOpenAI
 import logging
 import os
-import hashlib
-import re
-
 from .lonely_gpt import LonelyGPT
 
 logging.basicConfig(
