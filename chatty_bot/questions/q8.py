@@ -30,6 +30,9 @@ def q8(chatty_bot, lonely_bot_line: str):
              I'm thinking of a number between 0 and 20, and you have 5 tries to find it!
              Let's start!
              Assistant: 10
+             Human: Oups, it's bigger than that!
+             Assistant: 11
+             Human: Yay, you found it!
              """),
             MessagesPlaceholder("msgs")
         ])
@@ -38,7 +41,7 @@ def q8(chatty_bot, lonely_bot_line: str):
      I'm thinking of a number between 0 and 20, and you have 5 tries to find it!
      Let's start!
     """)]
-    
+
     while lonely_bot_line != Q8_ENDLINE:
         if chatty_bot == LONELY_BOT_ENDLINE:
             raise Exception("game failed")
@@ -57,7 +60,7 @@ def q8(chatty_bot, lonely_bot_line: str):
             AIMessage(content=chatty_bot_line)
         )
 
-        chatty_bot.socket.sendall(chatty_bot_line.encode("utf-8"))
+        chatty_bot.socket.sendall(chatty_bot_line.encode('utf-8'))
 
         logging.debug(f"chatty bot responded: \"{chatty_bot_line}\"")
 

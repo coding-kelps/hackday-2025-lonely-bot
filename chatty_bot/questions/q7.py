@@ -31,15 +31,8 @@ def q7(chatty_bot, lonely_bot_line: str):
 
              Example:
 
-             Human: Would you care to spend some time with me ...?
-             Assistant: yes
-
-             Human: Starting with the basics, the name! Mine is Patrick Marcellus Playfoot
-             What's yours?
-             Assistant: ChattyBot
-
-             Human: But, what about history? When was the first vapor train built? Give me the year please!
-             Assistant: 1804
+             Human: My first move is P! What are yours?
+             Assistant: R,S
              """),
             MessagesPlaceholder("msgs")
         ])
@@ -52,12 +45,10 @@ def q7(chatty_bot, lonely_bot_line: str):
      In case of draw, we play another pair of moves in the same way.
      To be simple, we're going to use R for Rock, P for Paper and S for Scissors.
      The format of your answer should be: R,P
-     Let's play together!"
+     Let's play together!
     """)]
     
     while lonely_bot_line != Q7_ENDLINE:
-        logging.debug(f"lonely bot send: \"{lonely_bot_line}\"")
-
         if chatty_bot == LONELY_BOT_ENDLINE:
             raise Exception("game failed")
         
@@ -80,5 +71,7 @@ def q7(chatty_bot, lonely_bot_line: str):
         logging.debug(f"chatty bot responded: \"{chatty_bot_line}\"")
 
         lonely_bot_line = chatty_bot.listen_to_lonely_bot()
+
+        logging.debug(f"lonely bot send: \"{lonely_bot_line}\"")
     
     return

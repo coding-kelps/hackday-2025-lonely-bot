@@ -1,5 +1,5 @@
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
+from langchain_core.messages import SystemMessage, HumanMessage
 
 def q9(chatty_bot, lonely_bot_line: str) -> str:
     """
@@ -18,19 +18,21 @@ def q9(chatty_bot, lonely_bot_line: str) -> str:
     """
     prompt_template = ChatPromptTemplate([
             SystemMessage("""
-             You are responding to a robot which is just a facade for a form with a strict format, always with a single word.
+             Translate the given word in the required language. Respond the translated word only
 
              Example:
 
-             Human: Would you care to spend some time with me ...?
-             Assistant: yes
-
-             Human: Starting with the basics, the name! Mine is Patrick Marcellus Playfoot
-             What's yours?
-             Assistant: ChattyBot
-
-             Human: But, what about history? When was the first vapor train built? Give me the year please!
-             Assistant: 1804
+             Human: I want you to translate the word /work/ in /romanian/
+             Assistant: lucru
+                          
+             Human: I want you to translate the word /person/ in /javanese/
+             Assistant: wong
+                          
+             Human: I want you to translate the word /week/ in /norwegian/
+             Assistant: uke
+                          
+             Human: I want you to translate the word /computer/ in /javanese/
+             Assistant: komputer
              """),
             MessagesPlaceholder("msgs")
         ])
