@@ -1,8 +1,7 @@
 import logging
 import socket
 from langchain_openai import ChatOpenAI
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.messages import HumanMessage, AIMessage
+from langchain_community.chat_models import ChatOllama
 from .questions import *
 
 LONELY_BOT_ENDLINE = "See you next time!"
@@ -12,7 +11,7 @@ INTERACTIVE_QUESTION = 1
 
 class LonelyGPT():
     def __init__(self,
-                 model: ChatOpenAI,
+                 model: ChatOllama | ChatOpenAI,
                  challenge_host: str = "challenges.hackday.Fr",
                  challenge_port: int = 41521):
         self.challenge_host = challenge_host
@@ -73,4 +72,4 @@ class LonelyGPT():
                 
             lonely_bot_line = self.listen_to_lonely_bot()
 
-        raise Exception("failed")
+        raise Exception(f"failed at question {question_counter}")
