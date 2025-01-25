@@ -80,4 +80,5 @@ class ChattyBot():
                 
             lonely_bot_line = self.listen_to_lonely_bot()
 
+        logging.debug(f"lonely bot send: \"{lonely_bot_line}\"")
         raise Exception(f"failed at question {question_counter+1}")
