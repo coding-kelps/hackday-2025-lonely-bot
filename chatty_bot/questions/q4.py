@@ -19,8 +19,8 @@ def q4(_chatty_bot, lonely_bot_line: str) -> str:
     elif "electric" in lonely_bot_line:
         return "1879"
     elif "diesel" in lonely_bot_line:
-        return "1924"
+        return "1912"
     elif "magnetic suspension" in lonely_bot_line:
-        return "1984"
+        return "1979"
     else:
         raise Exception("The lonely bot question didn't contained the expected keywords (vapor, eletric, diesel, magnetic suspension), sending empty response")

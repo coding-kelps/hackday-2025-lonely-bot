@@ -28,7 +28,7 @@ class ChattyBot():
             ("But, what about history?",                                                                                q4,     SIMPLE_QUESTION     ),
             ("Can't have you on this point, you know your basics! We'll see if you can keep up!",                       q5,     SIMPLE_QUESTION     ),
             ("You start with your name (format: hash(1,2,3,4))",                                                        q6,     SIMPLE_QUESTION     ),
-            ("Let's play together!",                                                                                    q7,     INTERACTIVE_QUESTION),
+            ("My first move is",                                                                                        q7,     INTERACTIVE_QUESTION),
             ("Let's start!",                                                                                            q8,     INTERACTIVE_QUESTION),
             ("I want you to translate the word",                                                                        q9,     SIMPLE_QUESTION     ),
             ("Here's the hash",                                                                                         q10,    SIMPLE_QUESTION     ),
@@ -81,4 +81,6 @@ class ChattyBot():
             lonely_bot_line = self.listen_to_lonely_bot()
 
         logging.debug(f"lonely bot send: \"{lonely_bot_line}\"")
+        
+        self.socket.close()
         raise Exception(f"failed at question {question_counter+1}")
