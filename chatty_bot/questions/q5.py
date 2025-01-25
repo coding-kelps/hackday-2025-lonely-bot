@@ -1,6 +1,7 @@
+import logging
 import base64
 
-ENCODED_PHRASE = "I know many encoding bases, but which one i'm using...?"
+ENCODED_PHRASE = "I know many encoding bases, but which one i'm using...?".encode("utf-8")
 
 def q5(chatty_bot, lonely_bot_line: str) -> str:
     """
@@ -19,10 +20,11 @@ def q5(chatty_bot, lonely_bot_line: str) -> str:
     ```
     """
     hash = chatty_bot.listen_to_lonely_bot()
+    logging.debug(f"lonely bot send: \"{hash}\"")
     
-    if base64.b64decode(hash).decode("utf-8") == ENCODED_PHRASE:
+    if base64.b64decode(hash) == ENCODED_PHRASE:
         return "base64"
-    elif base64.b85decode(hash).decode("utf-8") == ENCODED_PHRASE:
+    elif base64.b85decode(hash) == ENCODED_PHRASE:
         return "base85"
     else:
-        raise Exception("The lonely bot line didn't correspond to any encoding base, sending empty response")
+        raise Exception("The lonely bot hash didn't correspond to any encoding base, sending empty response")
