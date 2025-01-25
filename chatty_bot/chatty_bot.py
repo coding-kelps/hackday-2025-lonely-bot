@@ -1,7 +1,7 @@
 import logging
 import socket
 from langchain_openai import ChatOpenAI
-from langchain_community.chat_models import ChatOllama
+from langchain_ollama import ChatOllama
 from .questions import *
 
 LONELY_BOT_ENDLINE = "See you next time!"
