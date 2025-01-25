@@ -71,6 +71,7 @@ class ChattyBot():
                     self.responses.append(chatty_bot_line)
                 
                 question_counter += 1
+                logging.info(f"Passing to next question n°{question_counter}")
                 
             lonely_bot_line = self.listen_to_lonely_bot()
 
