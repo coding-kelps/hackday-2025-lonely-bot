@@ -1,9 +1,8 @@
-from ..chatty_bot import ChattyBot
 import base64
 
 ENCODED_PHRASE = "I know many encoding bases, but which one i'm using...?"
 
-def q5(chatty_bot: ChattyBot, lonely_bot_line: str) -> str:
+def q5(chatty_bot, lonely_bot_line: str) -> str:
     """
     Return the expected response to the 5th question of the lonely bot.
     Give the encoding base of the lonely bot line.

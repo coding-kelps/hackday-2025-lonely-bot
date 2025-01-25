@@ -1,6 +1,5 @@
-from langchain_openai import ChatOpenAI
+from langchain_community.chat_models import ChatOllama
 import logging
-import os
 from .chatty_bot import ChattyBot
 
 logging.basicConfig(
@@ -15,11 +14,10 @@ logging.getLogger('httpcore.http11').setLevel(logging.WARNING)
 logging.getLogger('httpx').setLevel(logging.WARNING)
 
 if __name__ == "__main__":
-    model = ChatOpenAI(
-        model="gpt-4o",
+    model = ChatOllama(
+        model="gemma:2b",
         temperature=1.0,
-        max_tokens=10,
-        api_key=os.environ["OPENAI_API_KEY"],
+        max_tokens=15,
     )
 
     chatty_bot = ChattyBot(model)
@@ -27,4 +25,4 @@ if __name__ == "__main__":
     try:
         chatty_bot.talk_to_lonely_bot()
     except Exception as e:
-        logging.error(f"{e.args}")
+        logging.error(f"{e.args[0]}")

@@ -1,11 +1,11 @@
 import logging
-from ..chatty_bot import ChattyBot, LONELY_BOT_ENDLINE
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 
+LONELY_BOT_ENDLINE = "See you next time!"
 Q7_ENDLINE = "Good game, you won!"
 
-def q7(chatty_bot: ChattyBot, lonely_bot_line: str):
+def q7(chatty_bot, lonely_bot_line: str):
     """
     Play rock-paper-scissors with the bot.
 

@@ -1,6 +1,4 @@
-from ..chatty_bot import ChattyBot
-
-def q2(chatty_bot: ChattyBot, _lonely_bot_line: str) -> str:
+def q2(chatty_bot, _lonely_bot_line: str) -> str:
     """
     Return the expected response to the 2nd question of the lonely bot.
     Simply returning our name.
