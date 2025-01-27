@@ -17,8 +17,9 @@ def q9(chatty_bot, lonely_bot_line: str) -> str:
     ```
     """
     prompt_template = ChatPromptTemplate([
-            SystemMessage("""
-             Translate the given word in the required language. Respond the translated word only
+            ("system", """
+             Translate the given word in the required language.
+             RESPOND ONLY THE TRANSLATED WORD
 
              Example:
 
