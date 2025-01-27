@@ -16,11 +16,10 @@ logging.getLogger('httpx').setLevel(logging.WARNING)
 
 if __name__ == "__main__":
     model = ChatOllama(
-        model="phi4:14b",
+        model="ollama3.1:8b",
         temperature=1.0,
-        num_predict=10,
-        top_p=1,
-        base_url=os.environ["OLLAMA_BASE_URL"]
+        max_predict=10,
+        base_url=os.environ["OLLAMA_BASE_URL"],
     )
 
     chatty_bot = ChattyBot(model)
