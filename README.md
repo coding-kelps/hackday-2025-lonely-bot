@@ -1,4 +1,4 @@
-⚠️ The present script is incomplete and won't pass the full corresponding challenges
+⚠️ This script is incomplete and won't fully pass the corresponding challenges.
 
 # hackday-2025-lonely-bot
 An solution implementation to the Hackday.fr 2025 lonely bot challenge
